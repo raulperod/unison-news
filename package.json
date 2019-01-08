@@ -1,0 +1,39 @@
+{
+  "name": "unison-news",
+  "version": "1.0.0",
+  "description": "Noticias para el departamento de matematicas",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/raulperod/unison-news.git"
+  },
+  "keywords": [
+    "nodejs",
+    "express",
+    "mongodb",
+    "pug",
+    "bootstrap"
+  ],
+  "author": "raulperod",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/raulperod/unison-news/issues"
+  },
+  "homepage": "https://github.com/raulperod/unison-news#readme",
+  "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "connect-flash": "^0.1.1",
+    "express": "^4.16.4",
+    "express-session": "^1.15.6",
+    "moment": "^2.23.0",
+    "mongoose": "^5.4.2",
+    "morgan": "^1.9.1",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
+    "pug": "^2.0.3"
+  }
+}
