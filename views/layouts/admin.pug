@@ -1,0 +1,105 @@
+doctype html
+html(lang='en')
+    head
+        // Required meta tags
+        meta(charset='utf-8')
+        meta(name='viewport', content='width=device-width, initial-scale=1, shrink-to-fit=no')
+        link(rel='apple-touch-icon', sizes='76x76', href='assets/img/apple-icon.png')
+        link(rel='icon', type='image/png', sizes='96x96', href='assets/img/favicon.png')
+        meta(http-equiv='X-UA-Compatible', content='IE=edge,chrome=1')
+        
+        meta(content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0', name='viewport')
+        
+        block title
+
+        block headstyles
+
+    body
+        // ==============================================================
+        // main wrapper
+        // ==============================================================
+        .dashboard-main-wrapper
+            // ==============================================================
+            // navbar
+            // ==============================================================
+            .dashboard-header
+                nav.navbar.navbar-expand-lg.bg-white.fixed-top
+                    a.navbar-brand(href='#') Unison-News
+                    button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarSupportedContent', aria-controls='navbarSupportedContent', aria-expanded='false', aria-label='Toggle navigation')
+                        span.navbar-toggler-icon
+                    #navbarSupportedContent.collapse.navbar-collapse
+                        ul.navbar-nav.ml-auto.navbar-right-top
+                            li.nav-item.dropdown.nav-user
+                                a#navbarDropdownMenuLink2.nav-link.nav-user-img(href='#', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
+                                    img.user-avatar-md.rounded-circle(src='/public/assets/images/avatar-0.jpg', alt='')
+                                .dropdown-menu.dropdown-menu-right.nav-user-dropdown(aria-labelledby='navbarDropdownMenuLink2')
+                                    .nav-user-info
+                                        h5.mb-0.text-white.nav-user-name
+                                            | #{user.name} #{user.last_name}
+                                    a.dropdown-item(href='/u/my-profile')
+                                        i.fas.fa-user.mr-2
+                                        | Mi Perfil
+                                    a.dropdown-item(href='/u/logout')
+                                        i.fas.fa-power-off.mr-2
+                                        | Cerrar Sesión
+            // ==============================================================
+            // end navbar
+            // ==============================================================
+            // ==============================================================
+            // left sidebar
+            // ==============================================================
+            .nav-left-sidebar.sidebar-dark
+                .menu-list
+                    nav.navbar.navbar-expand-lg.navbar-light
+                        a.d-xl-none.d-lg-none(href='#') Dashboard
+                        button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarNav', aria-controls='navbarNav', aria-expanded='false', aria-label='Toggle navigation')
+                            span.navbar-toggler-icon
+                        #navbarNav.collapse.navbar-collapse
+                            ul.navbar-nav.flex-column
+                                li.nav-divider
+                                    | Menu
+                                li.nav-item
+                                    a#muid.nav-link(href='#', data-toggle='collapse', aria-expanded='false', data-target='#submenu-1', aria-controls='submenu-1')
+                                        i.fa.fa-fw.fa-users
+                                        | Usuarios 
+                                        span.badge.badge-success 6
+                                    #submenu-1.collapse.submenu(style='')
+                                        ul.nav.flex-column
+                                            li.nav-item
+                                                a.nav-link(href='/u/new') Crear usuario
+                                            li.nav-item
+                                                a.nav-link(href='/u/list') Lista de usuarios
+                                            
+                                li.nav-item
+                                    a#mdid.nav-link(href='#', data-toggle='collapse', aria-expanded='false', data-target='#submenu-2', aria-controls='submenu-2')
+                                        i.fa.fa-fw.fa-building 
+                                        | Departamentos
+                                    #submenu-2.collapse.submenu(style='')
+                                        ul.nav.flex-column
+                                            li.nav-item
+                                                a.nav-link(href='/d/new') Crear departamento
+                                            li.nav-item
+                                                a.nav-link(href='/d/list') Lista de departamentos
+                                li.nav-item
+                                    a#mnid.nav-link(href='#', data-toggle='collapse', aria-expanded='false', data-target='#submenu-3', aria-controls='submenu-3')
+                                        i.fas.fa-fw.fa-newspaper
+                                        | Noticias
+                                    #submenu-3.collapse.submenu(style='')
+                                        ul.nav.flex-column
+                                            li.nav-item
+                                                a.nav-link(href='/n/list') Crear noticia
+                                            li.nav-item
+                                                a.nav-link(href='/n/list') Lista de noticias
+
+            // ==============================================================
+            // end left sidebar
+            // ==============================================================
+            // ==============================================================
+            // wrapper
+            // ==============================================================
+            .dashboard-wrapper
+                
+                block content
+
+                
+        block bodystyles

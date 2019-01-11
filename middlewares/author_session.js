@@ -1,12 +1,12 @@
 module.exports = function(req, res, next){
     let { user } = req.session
     if( user ){
-        if( user.permit < 1 ){
+        if( user.type == 0 ){
             next()
         } else {
-            res.redirect('')
+            res.redirect('/u/login')
         }
     }else{
-        res.redirect("")
+        res.redirect("/u/login")
     }
 }

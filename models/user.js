@@ -13,11 +13,21 @@ const User = new Schema({
         type: String,
         required: true,
     },
+    name: {
+        type: String,
+        required: true,
+        trim: true
+    },
+    last_name: {
+        type: String,
+        required: true,
+        trim: true
+    },
     type: {
         type: Number,
         required: true,
         enum:{
-            values: [0, 1], // autor y admin
+            values: [0, 1], // autor, admin
             message: "Invalid Option"
         }
     }

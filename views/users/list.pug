@@ -1,0 +1,75 @@
+extends ../layouts/admin.pug
+
+block title
+    title Lista de usuarios
+
+block headstyles
+    // Bootstrap CSS
+    link(rel='stylesheet', href='/public/assets/vendor/bootstrap/css/bootstrap.min.css')
+    link(href='/public/assets/vendor/fonts/circular-std/style.css', rel='stylesheet')
+    link(rel='stylesheet', href='/public/assets/libs/css/style.css')
+    link(rel='stylesheet', href='/public/assets/vendor/fonts/fontawesome/css/fontawesome-all.css')
+    link(rel='stylesheet', type='text/css', href='/public/assets/vendor/datatables/css/dataTables.bootstrap4.css')
+    link(rel='stylesheet', type='text/css', href='/public/assets/vendor/datatables/css/buttons.bootstrap4.css')
+    link(rel='stylesheet', type='text/css', href='/public/assets/vendor/datatables/css/select.bootstrap4.css')
+    link(rel='stylesheet', type='text/css', href='/public/assets/vendor/datatables/css/fixedHeader.bootstrap4.css')
+
+block content
+    .container-fluid.dashboard-content
+        // ==============================================================
+        // pageheader
+        // ==============================================================
+        .row
+            .col-xl-12.col-lg-12.col-md-12.col-sm-12.col-12
+                .page-header
+                    h2.pageheader-title Lista de usuarios
+                    .page-breadcrumb
+                        nav(aria-label='breadcrumb')
+                            ol.breadcrumb
+                                li.breadcrumb-item
+                                    a.breadcrumb-link(href='#') Usuarios
+                                li.breadcrumb-item.active(aria-current='page') Lista de usuarios
+        // ==============================================================
+        // end pageheader
+        // ==============================================================
+        .row
+            // ==============================================================
+            // basic table
+            // ==============================================================
+            .col-xl-12.col-lg-12.col-md-12.col-sm-12.col-12
+                .card
+                    h5.card-header Lista de usuarios
+                    .card-body
+                        .table-responsive
+                            table.table.table-striped.table-bordered.first
+                                thead
+                                    tr
+                                        th Nombre de usuario
+                                        th Nombre
+                                        th Apellido
+                                        th Tipo
+                                        th Acción
+                                tbody
+                                    each u in users
+                                        tr
+                                            td #{u.username}
+                                            td #{u.name}
+                                            td #{u.last_name}
+                                            if u.type == 0
+                                                td Autor
+                                            else
+                                                td Administrador
+                                            td
+                                                a.btn.btn-space.btn-primary(href="/u/edit/" + u.username) Editar
+                                                a.btn.btn-space.btn-secondary(href="/u/delete/" + u.username) Borrar
+
+block bodystyles                       
+    // Optional JavaScript
+    script(src='/public/assets/vendor/jquery/jquery-3.3.1.min.js')
+    script(src='/public/assets/vendor/bootstrap/js/bootstrap.bundle.js')
+    script(src='/public/assets/vendor/slimscroll/jquery.slimscroll.js')
+    script(src='/public/assets/vendor/multi-select/js/jquery.multi-select.js')
+    script(src='/public/assets/libs/js/main-js.js')
+    script(src='/public/assets/vendor/datatables/js/dataTables.bootstrap4.min.js')
+    script(src='/public/assets/vendor/datatables/js/buttons.bootstrap4.min.js')
+    script(src='/public/assets/vendor/datatables/js/data-table.js')

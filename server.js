@@ -33,10 +33,9 @@ app.use((req, res, next) => {
 // staticfiles
 app.use('/public', express.static('public') )
 // routes
-app.use('/a', require('./routes/author'))
-app.use('/d', require('./routes/department'))
-app.use('/n', require('./routes/news'))
 app.use('/u', require('./routes/user'))
+app.use('/d', require('./routes/department'))
+//app.use('/n', require('./routes/news'))
 // error 404
 app.use(function(req, res, next) {
     res.redirect("/u/login")
