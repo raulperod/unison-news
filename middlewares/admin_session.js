@@ -4,7 +4,7 @@ module.exports = function(req, res, next){
         if( user.type == 1 ){
             next()
         } else {
-            res.redirect('/u/login')
+            res.redirect('/n/list')
         }
     }else{
         res.redirect("/u/login")

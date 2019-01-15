@@ -1,0 +1,75 @@
+extends ../layouts/admin.pug
+
+block title
+    title Editar departamento
+
+block headstyles
+    // Bootstrap CSS
+    link(rel='stylesheet', href='/public/assets/vendor/bootstrap/css/bootstrap.min.css')
+    link(href='/public/assets/vendor/fonts/circular-std/style.css', rel='stylesheet')
+    link(rel='stylesheet', href='/public/assets/libs/css/style.css')
+    link(rel='stylesheet', href='/public/assets/vendor/fonts/fontawesome/css/fontawesome-all.css')
+
+block content
+
+    .container-fluid.dashboard-content
+        // ==============================================================
+        // pageheader
+        // ==============================================================
+        .row
+            .col-xl-12.col-lg-12.col-md-12.col-sm-12.col-12
+                .page-header
+                    h2.pageheader-title Editar departamento
+                    .page-breadcrumb
+                        nav(aria-label='breadcrumb')
+                            ol.breadcrumb
+                                li.breadcrumb-item
+                                    a.breadcrumb-link(href='#') Departamentos
+                                li.breadcrumb-item.active(aria-current='page') Editar departamento
+        // ==============================================================
+        // end pageheader
+        // ==============================================================
+        .row
+            // ==============================================================
+            // validation form
+            // ==============================================================
+            .col-xl-2.col-lg-2.col-md-2.col-sm-2.col-2
+            .col-xl-8.col-lg-8.col-md-8.col-sm-8.col-8
+                .card
+                    h5.card-header Editar departamento
+                    .card-body
+                        form#basicform(method='post')
+
+                            if messages.type === 1
+                                
+                                .alert.alert-danger.alert-dismissible.fade.show(role="alert") 
+                                    | #{messages.message} 
+                                    button.close(type="button" data-dismiss="alert" aria-label="Close")
+                                        span(aria-hidden="true") ×
+                                .form-group
+                                    label(for='inputName') Nombre
+                                    input#inputName.form-control(type='text', name='name', required='', value=messages.department.name, autocomplete='off')
+                                    input(name="id" type="hidden" value=messages.department._id)
+                            else
+
+                                .form-group
+                                    label(for='inputName') Nombre
+                                    input#inputName.form-control(type='text', name='name', required='', autocomplete='off', value=department.name)
+                                    input(name="id" type="hidden" value=department._id)
+                            .row
+                                .col-sm-12.pl-0
+                                    p.text-right
+                                        button.btn.btn-space.btn-primary(type='submit') Guardar
+            
+            .col-xl-2.col-lg-2.col-md-2.col-sm-2.col-2
+            // ==============================================================
+            // end valifation types
+            // ==============================================================
+            
+block bodystyles
+    // Optional JavaScript
+    script(src='/public/assets/vendor/jquery/jquery-3.3.1.min.js')
+    script(src='/public/assets/vendor/bootstrap/js/bootstrap.bundle.js')
+    script(src='/public/assets/vendor/slimscroll/jquery.slimscroll.js')
+    script(src='/public/assets/vendor/parsley/parsley.js')
+    script(src='/public/assets/libs/js/main-js.js')

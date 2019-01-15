@@ -4,7 +4,7 @@ const   mongoose = require('mongoose'),
 const News = new Schema({
     author: {
         type: Schema.Types.ObjectId,
-        ref: "Author",
+        ref: "User",
         required: true
     },
     department: {
@@ -29,14 +29,18 @@ const News = new Schema({
         trim: true
     },
     publication_date:{
-        type: Date
+        type: Date,
+        default: Date.now,
+        required: true
     },
     start_date:{
-        type: Date
+        type: Date,
+        required: true
     },
     finish_date:{
-        type: Date
+        type: Date,
+        required: true
     }
 })
 
-module.exports =  mongoose.model('News', News, "News")
+module.exports =  mongoose.model('News', News, "news")

@@ -10,14 +10,13 @@ router.get('/login', async (req, res) => {
     if (!user){
         res.render('users/login')
     }else{
-        //res.redirect('/n/list')
-        res.redirect('/u/new')
+        res.redirect('/n/list')
     }
 })
 
 router.post('/login', passport.authenticate('local-users-login', {
     //successRedirect: '/n/list',
-    successRedirect: '/u/new',
+    successRedirect: '/n/list',
     failureRedirect: '/u/login',
     failureFlash: true
 }))
@@ -42,6 +41,7 @@ router.post('/new', admin, async (req, res) => {
      
     if (password !== confirm_password){
         res.render('users/new', { 
+            user: req.session.user,
             messages: {type:1, message:"Las contraseñas no coinciden.", username, name, last_name, utype:type} 
         })
         return
@@ -49,6 +49,7 @@ router.post('/new', admin, async (req, res) => {
         
     if (await User.findOne({username})) {
         res.render('users/new', { 
+            user: req.session.user,
             messages: {type:1, message:"Ya existe un usuario con ese nombre.", username, name, last_name, utype:type} 
         })
         return
@@ -59,12 +60,60 @@ router.post('/new', admin, async (req, res) => {
     await newUser.save()
 
     res.render('users/new', { 
+        user: req.session.user,
         messages: {type:2, message:"Se creo el usuario exitosamente."} 
     })
 })
 
 router.get('/list', admin, async (req, res) => {
     res.render('users/list', {user:req.session.user, users: await User.find({}) })
+})
+
+router.get('/edit/:username', admin, async (req, res) => {
+    let { username } = req.params
+    if(user_edit = await User.findOne({username})){
+        res.render('users/edit', {user:req.session.user, user_edit, messages:{type:0, message:""}})        
+        return
+    }
+    res.redirect('/u/list')
+})
+
+router.post('/edit/:username', admin, async (req, res) => {
+    let { id } = req.body,
+        { name } = req.body,
+        { last_name } = req.body,
+        { password } = req.body,
+        { confirm_password } = req.body
+    
+        user_edit = await User.findById(id)
+
+    if (password !== confirm_password){
+        res.render('users/edit', { 
+            user_edit, messages: {type:1, message:"Las contraseñas no coinciden."} 
+        })
+        return
+    } 
+
+    if(password == ''){
+        await User.findByIdAndUpdate(id, {name, last_name})    
+    }else{
+        let password_encrypted = user_edit.encryptPassword(password)
+        await User.findByIdAndUpdate(id, {name, last_name, password: password_encrypted})
+    }
+
+    res.redirect('/u/list')
+})
+
+router.get('/delete/:username', admin, async (req, res) => {
+    let { username } = req.params
+
+    const user = await User.findOne({username})
+    if(!user){
+        res.redirect('/u/list')
+        return
+    }
+    await User.findByIdAndDelete(user._id)
+    res.redirect('/u/list')
 })
 
 router.get("/my-profile", session_active, (req, res) => {
@@ -96,5 +145,6 @@ router.post("/my-profile", session_active, async (req, res) => {
 
     res.render(url, {user: req.session.user, messages: {type:2, message: "La contraseña se cambio correctamente."}})
 })
+
 
 module.exports = router
