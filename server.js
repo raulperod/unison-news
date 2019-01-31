@@ -2,10 +2,13 @@ const   express = require('express'),
         path = require('path'),
         flash = require('connect-flash'),
         session = require('express-session'),
-        passport = require('passport')
+        passport = require('passport'),
+        uuid = require('uuid/v4'),
+        multer = require('multer')
 
 // initializations
 const   app = express()
+
 require('./database')
 require('./passport/local-auth')
 // settings
@@ -30,6 +33,15 @@ app.use((req, res, next) => {
    req.session.user = req.user
     next()
 })
+
+const storage = multer.diskStorage({
+    destination: path.join(__dirname, 'public/uploads'),
+    filename: (req, file, cb, filename) => {
+        cb(null, uuid() + path.extname(file.originalname));
+    }
+}) 
+app.use(multer({storage}).single('image'));
+
 // staticfiles
 app.use('/public', express.static('public') )
 // routes
