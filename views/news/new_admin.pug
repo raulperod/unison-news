@@ -59,8 +59,12 @@ block content
                                     label(for='inputTitle') Titulo
                                     input#inputTitle.form-control(type='text', name='title', required='', value=messages.title, autocomplete='off')
                                 .form-group
-                                    label(for='inputBody') Cuerpo de la noticia
-                                    textarea#inputBody.form-control(name="body" rows="4" required='' autocomplete='off') #{messages.body}
+                                    label(for='inputBody') Cuerpo de la noticia (Maximo 280 caracteres)
+                                    textarea#inputBody.form-control(name="body" rows="4" required='' maxlength="280" autocomplete='off') #{messages.body}
+                                    b
+                                        span 
+                                            | Caracteres: 
+                                            span#spancolor(style="color:green;") 280
                                 .form-group
                                     .custom-file
                                         input#inputImage.custom-file-input(type='file' name="image")
@@ -92,9 +96,12 @@ block content
                                     label(for='inputTitle') Titulo
                                     input#inputTitle.form-control(type='text', name='title', required='', placeholder='Titulo' , autocomplete='off')
                                 .form-group
-                                    label(for='inputBody') Cuerpo de la noticia
-                                    //input#inputBody.form-control(type='text', name='body', required='', placeholder='Cuerpo de la noticia', autocomplete='off')
-                                    textarea#inputBody.form-control(name="body" rows="4" required='' autocomplete='off')
+                                    label(for='inputBody') Cuerpo de la noticia (Maximo 280 caracteres)
+                                    textarea#inputBody.form-control(name="body" rows="4" required='' maxlength="280" autocomplete='off')
+                                    b
+                                        span 
+                                            | Caracteres: 
+                                            span#spancolor(style="color:green;") 280
                                 .form-group
                                     .custom-file
                                         input#inputImage.custom-file-input(type='file' name="image")
@@ -127,3 +134,21 @@ block bodystyles
     script(src='/public/assets/vendor/parsley/parsley.js')
     script(src='/public/assets/libs/js/main-js.js')
     script(src="/public/dates/fecha.js")
+    script.
+        $(function(){ 
+            $('#inputBody').on("input", function(){
+                var maxlength = $(this).attr("maxlength");
+                var currentLength = $(this).val().length;
+
+                $('#spancolor').text(maxlength - currentLength)
+
+                if( (maxlength-currentLength)/maxlength >= 0.40){
+                    $('#spancolor').css("color", "green")
+                }else if( (maxlength-currentLength)/maxlength >= 0.15 ){
+                    $('#spancolor').css("color", "yellow")
+                }else { 
+                    $('#spancolor').css("color", "red")
+                }
+            });
+        });
+    
