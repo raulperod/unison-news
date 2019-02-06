@@ -6,7 +6,7 @@ const   router = require('express').Router(),
 
 router.get('/login', async (req, res) => {
     let { user } = req.session
-
+    
     if (!user){
         res.render('users/login')
     }else{

@@ -72,7 +72,7 @@ router.get('/show/:department_name', session_active, async (req, res) => {
         { department_name } = req.params
 
     let departments_news = null
-    console.log(department_name)
+    
     if (department_name == "TODOS"){
         departments_news = await News.find({}).populate('image author')
     }else{
@@ -80,7 +80,7 @@ router.get('/show/:department_name', session_active, async (req, res) => {
         departments_news = await News.find({department}).populate('image author')
     }
     console.log(departments_news)
-    res.render('news/show', {user, departments_news})
+    res.render('news/show', {user, departments_news, domain: req.hostname})
 })
 
 module.exports = router
