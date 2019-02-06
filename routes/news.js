@@ -72,14 +72,14 @@ router.get('/show/:department_name', session_active, async (req, res) => {
         { department_name } = req.params
 
     let departments_news = null
-    
+
     if (department_name == "TODOS"){
         departments_news = await News.find({}).populate('image author')
     }else{
         let department = await Department.findOne({name:department_name})
         departments_news = await News.find({department}).populate('image author')
     }
-    console.log(departments_news)
+    
     res.render('news/show', {user, departments_news, domain: req.hostname})
 })
 
