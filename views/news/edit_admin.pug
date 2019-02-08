@@ -1,7 +1,7 @@
-extends ../layouts/author.pug
+extends ../layouts/admin.pug
 
 block title
-    title Crear noticia
+    title Editar noticia
 
 block headstyles
     // Bootstrap CSS
@@ -19,13 +19,13 @@ block content
         .row
             .col-xl-12.col-lg-12.col-md-12.col-sm-12.col-12
                 .page-header
-                    h2.pageheader-title Crear noticia
+                    h2.pageheader-title Editar noticia
                     .page-breadcrumb
                         nav(aria-label='breadcrumb')
                             ol.breadcrumb
                                 li.breadcrumb-item
                                     a.breadcrumb-link(href='#') Noticias
-                                li.breadcrumb-item.active(aria-current='page') Crear noticia
+                                li.breadcrumb-item.active(aria-current='page') Editar noticia
         // ==============================================================
         // end pageheader
         // ==============================================================
@@ -36,9 +36,9 @@ block content
             .col-xl-2.col-lg-2.col-md-2.col-sm-2.col-2
             .col-xl-8.col-lg-8.col-md-8.col-sm-8.col-8
                 .card
-                    h5.card-header Crear noticia
+                    h5.card-header Editar noticia
                     .card-body
-                        form#basicform(method='post' enctype="multipart/form-data")
+                        form#basicform(method='post' enctype="multipart/form-data" )
 
                             if messages.type === 1
                                 
@@ -48,73 +48,70 @@ block content
                                         span(aria-hidden="true") ×
 
                                 .form-group
-                                        label(for="forType") Departamento
-                                        select#forType.form-control(name="department_name")
-                                            each d in departments
-                                                if messages.department_name == d.name
-                                                    option(selected) #{d.name}
-                                                else
-                                                    option() #{d.name} 
+                                    label(for="forType") Departamento
+                                    select#forType.form-control(name="department_name")
+                                        each d in departments
+                                            if messages.department_name == d.name
+                                                option(selected) #{d.name} 
+                                            else
+                                                option() #{d.name}
                                 .form-group
                                     label(for='inputTitle') Titulo
-                                    input#inputTitle.form-control(type='text', name='title', required='', value=messages.title, autocomplete='off')
+                                    input#inputTitle.form-control(type='text', name='title', required='', value=messages.title , autocomplete='off')
                                 .form-group
                                     label(for='inputBody') Cuerpo de la noticia (Maximo 280 caracteres)
-                                    textarea#inputBody.form-control(name="body" rows="4" required='' maxlength="280" autocomplete='off')
-                                    b
-                                        span 
-                                            | Caracteres: 
-                                            span#spancolor(style="color:green;") 280 
-                                .form-group
-                                    .custom-file
-                                        input#inputImage.custom-file-input(type='file' name="image" required)
-                                        label.custom-file-label(for='inputImage') Elegir imagen
-                                .form-group
-                                    label(for='inputUrl') Url de la fuente
-                                    input#inputUrl.form-control(type='text', name='url', required='', value=messages.url, autocomplete='off')
-                                .form-group
-                                    label(for='inputstartdate') Fecha de inicio
-                                    input#inputstartdate.form-control(type='date', name="start_date", required='')
-                                .form-group
-                                    label(for='inputfinishdate') Fecha de cierre
-                                    input#inputfinishdate.form-control(type='date', name="finish_date" , required='')
-                                
-                            else
-
-                                if messages.type === 2
-                                    .alert.alert-success.alert-dismissible.fade.show(role="alert") 
-                                        | #{messages.message} 
-                                        button.close(type="button" data-dismiss="alert" aria-label="Close")
-                                            span(aria-hidden="true") ×
-
-                                .form-group
-                                        label(for="forType") Departamento
-                                        select#forType.form-control(name="department_name")
-                                            each d in departments
-                                                option() #{d.name} 
-                                .form-group
-                                    label(for='inputTitle') Titulo
-                                    input#inputTitle.form-control(type='text', name='title', required='', placeholder='Titulo' , autocomplete='off')
-                                .form-group
-                                    label(for='inputBody') Cuerpo de la noticia (Maximo 280 caracteres)
-                                    textarea#inputBody.form-control(name="body" rows="4" required='' maxlength="280" autocomplete='off')
+                                    textarea#inputBody.form-control(name="body" rows="4" required='' maxlength="280" autocomplete='off') #{messages.body}
                                     b
                                         span 
                                             | Caracteres: 
                                             span#spancolor(style="color:green;") 280
                                 .form-group
                                     .custom-file
-                                        input#inputImage.custom-file-input(type='file' name="image" required)
+                                        input#inputImage.custom-file-input(type='file' name="image")
                                         label.custom-file-label(for='inputImage') Elegir imagen
                                 .form-group
                                     label(for='inputUrl') Url de la fuente
-                                    input#inputUrl.form-control(type='text', name='url', required='', placeholder='Url de la fuente', autocomplete='off')
+                                    input#inputUrl.form-control(type='text', name='url', required='', value=messages.url, autocomplete='off')
                                 .form-group
                                     label(for='inputstartdate') Fecha de inicio
-                                    input#inputstartdate.form-control(type='date', name="start_date", required='')
+                                    input#inputstartdate.form-control(type='date', name="start_date",value=messages.start_date ,required='')
                                 .form-group
                                     label(for='inputfinishdate') Fecha de cierre
-                                    input#inputfinishdate.form-control(type='date', name="finish_date" , required='')
+                                    input#inputfinishdate.form-control(type='date', name="finish_date",value=messages.finish_date , required='')
+                                
+                            else
+
+                                .form-group
+                                    label(for="forType") Departamento
+                                    select#forType.form-control(name="department_name")
+                                        each d in departments
+                                            if news.department.name == d.name
+                                                option(selected) #{d.name} 
+                                            else
+                                                option() #{d.name}
+                                .form-group
+                                    label(for='inputTitle') Titulo
+                                    input#inputTitle.form-control(type='text', name='title', required='', value=news.title , autocomplete='off')
+                                .form-group
+                                    label(for='inputBody') Cuerpo de la noticia (Maximo 280 caracteres)
+                                    textarea#inputBody.form-control(name="body" rows="4" required='' maxlength="280" autocomplete='off') #{news.body}
+                                    b
+                                        span 
+                                            | Caracteres: 
+                                            span#spancolor(style="color:green;") 280
+                                .form-group
+                                    .custom-file
+                                        input#inputImage.custom-file-input(type='file' name="image")
+                                        label.custom-file-label(for='inputImage') Elegir imagen
+                                .form-group
+                                    label(for='inputUrl') Url de la fuente
+                                    input#inputUrl.form-control(type='text', name='url', required='', value=news.url, autocomplete='off')
+                                .form-group
+                                    label(for='inputstartdate') Fecha de inicio
+                                    input#inputstartdate.form-control(type='date', name="start_date",value=news.start_date.toISOString().split('T')[0] ,required='')
+                                .form-group
+                                    label(for='inputfinishdate') Fecha de cierre
+                                    input#inputfinishdate.form-control(type='date', name="finish_date",value=news.finish_date.toISOString().split('T')[0] , required='')
 
                             .row
                                 .col-sm-12.pl-0
@@ -133,12 +130,25 @@ block bodystyles
     script(src='/public/assets/vendor/slimscroll/jquery.slimscroll.js')
     script(src='/public/assets/vendor/parsley/parsley.js')
     script(src='/public/assets/libs/js/main-js.js')
-    script(src="/public/dates/fecha.js")
     script.
         $(function(){ 
+            // init
+            var maxlength = $('#inputBody').attr("maxlength");
+            var currentLength = $('#inputBody').val().length;
+            
+            $('#spancolor').text(maxlength - currentLength)
+
+            if( (maxlength-currentLength)/maxlength >= 0.40){
+                $('#spancolor').css("color", "green")
+            }else if( (maxlength-currentLength)/maxlength >= 0.15 ){
+                $('#spancolor').css("color", "yellow")
+            }else { 
+                $('#spancolor').css("color", "red")
+            }
+            // uptade changes
             $('#inputBody').on("input", function(){
-                var maxlength = $(this).attr("maxlength");
-                var currentLength = $(this).val().length;
+                maxlength = $(this).attr("maxlength");
+                currentLength = $(this).val().length;
 
                 $('#spancolor').text(maxlength - currentLength)
 
@@ -150,4 +160,6 @@ block bodystyles
                     $('#spancolor').css("color", "red")
                 }
             });
+
         });
+    
