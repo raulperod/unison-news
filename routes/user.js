@@ -15,7 +15,6 @@ router.get('/login', async (req, res) => {
 })
 
 router.post('/login', passport.authenticate('local-users-login', {
-    //successRedirect: '/n/list',
     successRedirect: '/n/list',
     failureRedirect: '/u/login',
     failureFlash: true
@@ -50,7 +49,7 @@ router.post('/new', admin, async (req, res) => {
     if (await User.findOne({username})) {
         res.render('users/new', { 
             user: req.session.user,
-            messages: {type:1, message:"Ya existe un usuario con ese nombre.", username, name, last_name, utype:type} 
+            messages: {type:1, message:"Ya existe un usuario con ese nombre de usuario.", username, name, last_name, utype:type} 
         })
         return
     }
@@ -124,26 +123,43 @@ router.get("/my-profile", session_active, (req, res) => {
 
 router.post("/my-profile", session_active, async (req, res) => {
     let {user} = req.session,
+        {name} = req.body,
+        {last_name} = req.body,
         {password_old} = req.body,
         {password_new1} = req.body,
         {password_new2} = req.body,
         url = user.type > 0 ? 'users/change_password_admin' : 'users/change_password_author'
 
-    if (password_new1 !== password_new2){
-        res.render(url, {user, messages: {type:1, message: "Las contraseñas no coinciden."}})
+    if (password_new1 !== '' || password_new2 !== '' || password_old !== ''){
+    
+        if (password_new1 !== password_new2){
+            res.render(url, {user, messages: {type:1, message: "Las contraseñas no coinciden."}})
+            return
+        }
+
+        if (!user.comparePassword(password_old, user.password)){
+            res.render(url, {user, messages: {type:1, message: "La contraseña actual es incorrecta."}})
+            return
+        }
+
+        let password = user.encryptPassword(password_new1)
+        await User.findByIdAndUpdate(user._id, {password})
+        req.session.user.password = password
+    }
+
+
+    if (name == '' || last_name == ''){
+        res.render(url, {user, messages: {type:1, message: "Los nombre o apellidos están vacíos."}})
         return
     }
 
-    if (!user.comparePassword(password_old, user.password)){
-        res.render(url, {user, messages: {type:1, message: "La contraseña actual es incorrecta."}})
-        return
+    if (user.name !== name || user.last_name !== last_name){
+        req.session.user.name = name
+        req.session.user.last_name = last_name
+        await User.findByIdAndUpdate(user._id, {name, last_name})
     }
 
-    let password = user.encryptPassword(password_new1)
-    await User.findByIdAndUpdate(user._id, {password})
-    req.session.user.password = password
-
-    res.render(url, {user: req.session.user, messages: {type:2, message: "La contraseña se cambio correctamente."}})
+    res.render(url, {user: req.session.user, messages: {type:2, message: "Los cambios se guardaron correctamente."}})
 })
 
 
