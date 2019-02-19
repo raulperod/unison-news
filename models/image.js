@@ -7,26 +7,16 @@ const Image = new Schema({
         required: true,
         trim: true
     },
-    path: {
+    imageURL: {
         type: String,
         required: true,
         trim: true
     },
-    originalname: {
+    public_id: {
         type: String,
         required: true,
         trim: true
-    },
-    mimetype: {
-        type: String,
-        required: true,
-        trim: true
-    },
-    size: {
-        type: String,
-        required: true,
-        trim: true
-    },
+    }
 })
 
 module.exports = mongoose.model('Image', Image);

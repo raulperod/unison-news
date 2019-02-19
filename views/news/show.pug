@@ -31,12 +31,12 @@ html(lang='en')
 
                     each n, i in departments_news    
                         if i == 0
-                            .carousel-item.active(style="background-image: url('https://"+domain+"/public"+n.image.path+"')")
+                            .carousel-item.active(style="background-image: url('" + n.image.imageURL + "')")
                                 .carousel-caption.d-none.d-md-block
                                     h3 #{n.title}
                                     p #{n.body}
                         else
-                            .carousel-item(style="background-image: url('https://"+domain+"/public"+n.image.path+"')")
+                            .carousel-item(style="background-image: url('" + n.image.imageURL + "')")
                                 .carousel-caption.d-none.d-md-block
                                     h3 #{n.title} 
                                     p #{n.body}

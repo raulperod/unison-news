@@ -5,7 +5,14 @@ const   router = require('express').Router(),
         { unlink } = require('fs-extra'),
         path = require('path'),
         session_active = require('../middlewares/session_active'),
-        moment = require('moment')
+        moment = require('moment'),
+        cloudinary = require('cloudinary')
+
+cloudinary.config({
+    cloud_name: 'raulperod-dbfiles',
+    api_key: '357375837816246',
+    api_secret: 'RFmJRcbcWa1gr7sg3aRKc01q_Hg'
+})
 
 router.get('/new', session_active, async (req, res) => {
     let { user } = req.session,
@@ -41,16 +48,16 @@ router.post('/new', session_active, async (req, res) => {
     if(!department){
         res.redirect('/d/new')
     }
-
+    // cloudinary
+    const rimage = await cloudinary.v2.uploader.upload(req.file.path)
     // image
     let newImage = new Image({
         filename: req.file.filename,
-        path: '/uploads/' + req.file.filename,
-        originalname: req.file.originalname,
-        mimetype: req.file.mimetype,
-        size: req.file.size
+        imageURL: rimage.secure_url,
+        public_id: rimage.public_id
     })
     await newImage.save()
+    await unlink(req.file.path)
     
     let newNews = new News({ title, department, author:req.session.user, body, url, image: newImage, start_date, finish_date })
     await newNews.save()
@@ -117,13 +124,16 @@ router.post('/edit/:idNews', session_active, async (req, res) => {
     // delete and update image
     if (req.file !== undefined){
         let updateImage = updateNews.image
-        await unlink(path.resolve('./public' + updateImage.path))
-        updateImage.filename = req.file.filename,
-        updateImage.path = '/uploads/' + req.file.filename
-        updateImage.originalname = req.file.originalname
-        updateImage.mimetype = req.file.mimetype
-        updateImage.size = req.file.size
-        updateImage.save()
+        // delete image from server
+        await cloudinary.v2.uploader.destroy(updateImage.public_id);
+        // upload image to cloudinary
+        const rimage = await cloudinary.v2.uploader.upload(req.file.path)
+        // update image
+        updateImage.filename = req.file.filename
+        updateImage.imageURL = rimage.secure_url
+        updateImage.public_id = rimage.public_id
+        await updateImage.save()
+        await unlink(req.file.path)
     }
     
     updateNews.start_date = start_date
@@ -138,7 +148,7 @@ router.get('/delete/:idNews', session_active, async (req, res) => {
     let { idNews } = req.params
 
     let deleteNews = await News.findById(idNews).populate('image')
-    await unlink(path.resolve('./public' + deleteNews.image.path))
+    await cloudinary.v2.uploader.destroy(deleteNews.image.public_id);
     await Image.findByIdAndDelete(deleteNews.image._id)
     await News.findByIdAndDelete(idNews)
     res.redirect('/n/list')
@@ -157,7 +167,7 @@ router.get('/show/:department_name', session_active, async (req, res) => {
         departments_news = await News.find({department}).populate('image author')
     }
     
-    res.render('news/show', {user, departments_news, domain: req.hostname})
+    res.render('news/show', {user, departments_news})
 })
 
 module.exports = router
