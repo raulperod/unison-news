@@ -117,7 +117,7 @@ router.get('/delete/:username', admin, async (req, res) => {
 
 router.get("/my-profile", session_active, (req, res) => {
     let {user} = req.session,
-        url = user.type > 0 ? 'users/change_password_admin' : 'users/change_password_author'
+        url = user.type > 0 ? 'users/my_perfil_admin' : 'users/my_perfil_author'
     res.render(url, {user, messages: {type:0, message:""}})
 })
 
@@ -128,7 +128,7 @@ router.post("/my-profile", session_active, async (req, res) => {
         {password_old} = req.body,
         {password_new1} = req.body,
         {password_new2} = req.body,
-        url = user.type > 0 ? 'users/change_password_admin' : 'users/change_password_author'
+        url = user.type > 0 ? 'users/my_perfil_admin' : 'users/my_perfil_author'
 
     if (password_new1 !== '' || password_new2 !== '' || password_old !== ''){
     
@@ -161,6 +161,5 @@ router.post("/my-profile", session_active, async (req, res) => {
 
     res.render(url, {user: req.session.user, messages: {type:2, message: "Los cambios se guardaron correctamente."}})
 })
-
 
 module.exports = router

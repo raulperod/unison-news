@@ -1,0 +1,95 @@
+extends ../layouts/author.pug
+
+block title
+    title Mi Perfil
+
+block headstyles
+    // Bootstrap CSS
+    link(rel='stylesheet', href='/public/assets/vendor/bootstrap/css/bootstrap.min.css')
+    link(href='/public/assets/vendor/fonts/circular-std/style.css', rel='stylesheet')
+    link(rel='stylesheet', href='/public/assets/libs/css/style.css')
+    link(rel='stylesheet', href='/public/assets/vendor/fonts/fontawesome/css/fontawesome-all.css')
+
+block content
+
+    .container-fluid.dashboard-content
+        // ==============================================================
+        // pageheader
+        // ==============================================================
+        .row
+            .col-xl-12.col-lg-12.col-md-12.col-sm-12.col-12
+                .page-header
+                    h2.pageheader-title Mi perfil
+                    .page-breadcrumb
+                        nav(aria-label='breadcrumb')
+                            ol.breadcrumb
+                                li.breadcrumb-item
+                                    a.breadcrumb-link(href='#') Usuarios
+                                li.breadcrumb-item.active(aria-current='page') Mi perfil
+        // ==============================================================
+        // end pageheader
+        // ==============================================================
+        .row
+            // ==============================================================
+            // validation form
+            // ==============================================================
+            .col-xl-2.col-lg-2.col-md-2.col-sm-2.col-2
+            .col-xl-8.col-lg-8.col-md-8.col-sm-8.col-8
+                .card
+                    h5.card-header Mi perfil
+                    .card-body
+                        form#basicform(method='post')
+
+                            if messages.type == 1
+                                .alert.alert-danger.alert-dismissible.fade.show(role="alert") 
+                                    | #{messages.message} 
+                                    button.close(type="button" data-dismiss="alert" aria-label="Close")
+                                        span(aria-hidden="true") ×
+                            else if messages.type == 2
+                                .alert.alert-success.alert-dismissible.fade.show(role="alert") 
+                                    | #{messages.message} 
+                                    button.close(type="button" data-dismiss="alert" aria-label="Close")
+                                        span(aria-hidden="true") ×
+
+                            .form-group
+                                label(for='username') Nombre de usuario
+                                input#username.form-control(type='text', disabled='', value=user.username, autocomplete='off')
+                            .form-group
+                                label(for='inputName') Nombres
+                                input#inputName.form-control(type='text', name='name', value=user.name, autocomplete='off')
+                            .form-group
+                                label(for='inputLastName') Apellidos
+                                input#inputLastName.form-control(type='text', name='last_name', value=user.last_name, autocomplete='off')
+                            .form-group
+                                label(for='forType') Tipo de usuario
+                                if user.type == 0
+                                    input#forType.form-control(type='text', disabled='', value='Autor')
+                                else
+                                    input#forType.form-control(type='text', disabled='', value='Administrador')
+                            .form-group
+                                label(for='passwordOld') Contraseña Actual
+                                input#passwordOld.form-control(type='password', name="password_old", placeholder='Contraseña Actual')
+                            .form-group
+                                label(for='passwordNew1') Nueva contraseña
+                                input#passwordNew1.form-control(type='password', name="password_new1", placeholder='Nueva contraseña')
+                            .form-group
+                                label(for='passwordNew2') Confirmar nueva contraseña
+                                input#passwordNew2.form-control(name="password_new2" type='password', placeholder='Confirmar nueva contraseña')    
+
+                            .row
+                                .col-sm-12.pl-0
+                                    p.text-right
+                                        button.btn.btn-space.btn-primary(type='submit') Guardar
+            
+            .col-xl-2.col-lg-2.col-md-2.col-sm-2.col-2
+            // ==============================================================
+            // end valifation types
+            // ==============================================================
+            
+block bodystyles
+    // Optional JavaScript
+    script(src='/public/assets/vendor/jquery/jquery-3.3.1.min.js')
+    script(src='/public/assets/vendor/bootstrap/js/bootstrap.bundle.js')
+    script(src='/public/assets/vendor/slimscroll/jquery.slimscroll.js')
+    script(src='/public/assets/vendor/parsley/parsley.js')
+    script(src='/public/assets/libs/js/main-js.js')

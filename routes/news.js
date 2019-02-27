@@ -170,4 +170,9 @@ router.get('/show/:department_name', session_active, async (req, res) => {
     res.render('news/show', {user, departments_news})
 })
 
+router.post('/getnews', session_active, async (req, res) => {
+    let news = await News.find({}).populate('image').sort('-start_date').limit(5)
+    res.json({ news })
+})
+
 module.exports = router

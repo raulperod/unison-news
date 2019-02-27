@@ -67,9 +67,9 @@ block content
                                     select#forType.form-control(name="type", disabled)
                                         if user_edit.type == 0
                                             option(value="0" selected) Autor
-                                            option(value="1") Administrador
+                                            //option(value="1") Administrador
                                         else
-                                            option(value="0") Autor
+                                            //option(value="0") Autor
                                             option(value="1" selected) Administrador
                             input(name="id" type="hidden" value=user_edit._id)
                             .row

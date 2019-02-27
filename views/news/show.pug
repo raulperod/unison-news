@@ -20,27 +20,10 @@ html(lang='en')
     body
         header
             #carouselExampleIndicators.carousel.slide(data-ride='carousel')
-                ol.carousel-indicators
-                    each n, i in departments_news    
-                        if i == 0
-                            li.active(data-target='#carouselExampleIndicators', data-slide-to=i)
-                        else
-                            li(data-target='#carouselExampleIndicators', data-slide-to=i)
-                        
-                .carousel-inner(role='listbox')
+                ol#newslist1.carousel-indicators
+                      
+                #newslist2.carousel-inner(role='listbox')
 
-                    each n, i in departments_news    
-                        if i == 0
-                            .carousel-item.active(style="background-image: url('" + n.image.imageURL + "')")
-                                .carousel-caption.d-none.d-md-block
-                                    h3 #{n.title}
-                                    p #{n.body}
-                        else
-                            .carousel-item(style="background-image: url('" + n.image.imageURL + "')")
-                                .carousel-caption.d-none.d-md-block
-                                    h3 #{n.title} 
-                                    p #{n.body}
-              
                 a.carousel-control-prev(href='#carouselExampleIndicators', role='button', data-slide='prev')
                     span.carousel-control-prev-icon(aria-hidden='true')
                     span.sr-only Anterior
@@ -55,3 +38,4 @@ html(lang='en')
         script(src='/public/assets/vendor/slimscroll/jquery.slimscroll.js')
         script(src='/public/assets/vendor/parsley/parsley.js')
         script(src='/public/assets/libs/js/main-js.js')
+        script(src="/public/assets/show/update_slider.js")
