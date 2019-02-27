@@ -154,9 +154,8 @@ router.get('/delete/:idNews', session_active, async (req, res) => {
     res.redirect('/n/list')
 })
 
-router.get('/show/:department_name', session_active, async (req, res) => {
-    let { user } = req.session,
-        { department_name } = req.params
+router.get('/show/:department_name', async (req, res) => {
+    let { department_name } = req.params
 
     let departments_news = null
 
@@ -167,10 +166,10 @@ router.get('/show/:department_name', session_active, async (req, res) => {
         departments_news = await News.find({department}).populate('image author')
     }
     
-    res.render('news/show', {user, departments_news})
+    res.render('news/show', {departments_news})
 })
 
-router.post('/getnews', session_active, async (req, res) => {
+router.post('/getnews', async (req, res) => {
     let news = await News.find({}).populate('image').sort('-start_date').limit(5)
     res.json({ news })
 })
