@@ -19,15 +19,19 @@ function addNews(news){
         if(i==0){
             $("#newslist2").append(`  <div class="carousel-item active" style="background-image: url(${news[i].image.imageURL});">
                                             <div class="carousel-caption d-none d-md-block">
-                                            <h3>${news[i].title}</h3>
-                                            <p>${news[i].body}</p>
+                                                <div class="fondo">
+                                                    <h3>${news[i].title}</h3>
+                                                    <p>${news[i].body}</p>
+                                                </div>    
                                             </div>
                                         </div>`);
         }else{
             $("#newslist2").append(`  <div class="carousel-item" style="background-image: url(${news[i].image.imageURL});">
                                             <div class="carousel-caption d-none d-md-block">
-                                            <h3>${news[i].title}</h3>
-                                            <p>${news[i].body}</p>
+                                                <div class="fondo">     
+                                                    <h3>${news[i].title}</h3>
+                                                    <p>${news[i].body}</p>
+                                                </div>        
                                             </div>
                                         </div>`);
         }
@@ -52,7 +56,7 @@ function getNews(){
 }
 
 $(function(){ 
-    var minutes = 5
+    var minutes = 10
     getNews()   
     // refreshing
     setInterval(function(){ 

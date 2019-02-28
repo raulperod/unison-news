@@ -1,0 +1,28 @@
+.fondo{
+    background-color: #004990;
+    opacity: .7;
+    padding:15px 15px 15px 15px;
+}
+#tit{
+    text-align: center;
+}
+.logo-lcc{
+    width: 60%;
+    height: auto;
+    display: block;
+    margin-left: auto;
+}
+
+.logo-unison{
+    width: 70%;
+    height: auto;
+    display: block;
+    margin-right: auto;
+}
+
+.hdr{
+    width: 100%;
+    height: 10%;
+    background-color: #ffffff;
+    padding: 10px 10px 10px 50px;
+}

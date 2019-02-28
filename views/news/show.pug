@@ -11,13 +11,24 @@ html(lang='en')
         meta(content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0', name='viewport')
         
         title Noticias
-
+        link(rel='stylesheet', href='/public/documentation/css/header.css')
         link(rel='stylesheet', href='/public/assets/vendor/bootstrap/css/bootstrap.min.css')
         link(rel='stylesheet', href='/public/assets/vendor/fonts/circular-std/style.css')
         // Custom styles for this template
         link(rel='stylesheet', href='/public/assets/libs/css/full-slider.css')
 
     body
+        .hdr
+            .row
+                .col-md-2.col-sm-2.col-xs-2
+                    img.logo-unison(src='https://www.unison.mx/wp-content/themes/awaken/images/logo.png')
+                .col-md-7.col-sm-7.col-xs-7
+                    #tit
+                        h1 Universidad de Sonora
+                        h4 "El saber de mis hijos hará mi grandeza"
+                .col-md-3.col-sm-2.col-xs-2
+                    img.logo-lcc(src='http://3.bp.blogspot.com/-2bz7zDgDtyo/UZKZSwUyTeI/AAAAAAAAASk/tfLhTJqxxuk/s1600/logoLCCazul.png')
+
         header
             #carouselExampleIndicators.carousel.slide(data-ride='carousel')
                 ol#newslist1.carousel-indicators
