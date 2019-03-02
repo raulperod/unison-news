@@ -29,6 +29,7 @@ html(lang='en')
                             h6 Del 4 al 8 de marzo
                     .col-md-3.col-sm-3.col-xs-3
                         img.logo-lcc(src='http://3.bp.blogspot.com/-2bz7zDgDtyo/UZKZSwUyTeI/AAAAAAAAASk/tfLhTJqxxuk/s1600/logoLCCazul.png')
+        
             #carouselExampleIndicators.carousel.slide(data-ride='carousel')
                 ol#newslist1.carousel-indicators
                     each n, i in departments_news    
@@ -36,7 +37,7 @@ html(lang='en')
                             li.active(data-target='#carouselExampleIndicators', data-slide-to=i)
                         else
                             li(data-target='#carouselExampleIndicators', data-slide-to=i)
-                      
+                    
                 #newslist2.carousel-inner(role='listbox')
                     each n, i in departments_news    
                         if i == 0
