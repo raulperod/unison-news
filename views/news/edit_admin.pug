@@ -74,10 +74,10 @@ block content
                                     input#inputUrl.form-control(type='text', name='url', required='', value=messages.url, autocomplete='off')
                                 .form-group
                                     label(for='inputstartdate') Fecha de inicio
-                                    input#inputstartdate.form-control(type='date', name="start_date",value=messages.start_date ,required='')
+                                    input#inputstartdate.form-control(type='date', name="start_date",value=messages.start_date.toISOString().split('T')[0] ,required='')
                                 .form-group
                                     label(for='inputfinishdate') Fecha de cierre
-                                    input#inputfinishdate.form-control(type='date', name="finish_date",value=messages.finish_date , required='')
+                                    input#inputfinishdate.form-control(type='date', name="finish_date",value=messages.finish_date.toISOString().split('T')[0], required='')
                                 
                             else
 
@@ -116,7 +116,7 @@ block content
                             .row
                                 .col-sm-12.pl-0
                                     p.text-right
-                                        button.btn.btn-space.btn-primary(type='submit') Crear
+                                        button.btn.btn-space.btn-primary(type='submit') Guardar
             
             .col-xl-2.col-lg-2.col-md-2.col-sm-2.col-2
             // ==============================================================

@@ -41,12 +41,14 @@ router.post('/new', session_active, async (req, res) => {
             departments: await Department.find({}), 
             messages: {type:1, message:"La fecha de cierre es antes que la de inicio.", title, department_name, body, url} 
         })
+        return
     }
 
     let department = await Department.findOne({name:department_name})
 
     if(!department){
         res.redirect('/d/new')
+        return
     }
     // cloudinary
     const rimage = await cloudinary.v2.uploader.upload(req.file.path)
@@ -107,12 +109,14 @@ router.post('/edit/:idNews', session_active, async (req, res) => {
             departments: await Department.find({}), 
             messages: {type:1, message:"La fecha de cierre es antes que la de inicio.", title, department_name, body, url, start_date, finish_date} 
         })
+        return
     }
 
     let department = await Department.findOne({name:department_name})
 
     if(!department){
         res.redirect('/d/new')
+        return
     }
 
     let updateNews = await News.findById(idNews).populate('image')
@@ -158,19 +162,20 @@ router.get('/show/:department_name', async (req, res) => {
     let { department_name } = req.params
 
     let departments_news = null
-
+    /*
     if (department_name == "TODOS"){
         departments_news = await News.find({}).populate('image author')
     }else{
         let department = await Department.findOne({name:department_name})
         departments_news = await News.find({department}).populate('image author')
     }
-    
-    res.render('news/show', {departments_news})
+    */
+    res.render('news/show', {})
 })
 
 router.post('/getnews', async (req, res) => {
-    let news = await News.find({}).populate('image').sort('-start_date').limit(5)
+    const current_time = moment().toDate()
+    let news = await News.find({ start_date: { $lt: current_time }, finish_date: { $gt: current_time } }).populate('image').sort('-start_date').limit(10)
     res.json({ news })
 })
 

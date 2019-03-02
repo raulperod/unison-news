@@ -47,7 +47,8 @@ block content
                                         th Departamento
                                         th Autor
                                         th Titulo
-                                        th Fecha de publicación
+                                        th Fecha de inicio
+                                        th Fecha de terminación
                                         th Acción
                                 tbody
                                     each n in news
@@ -55,7 +56,8 @@ block content
                                             td #{n.department.name}
                                             td #{n.author.name} #{n.author.last_name} 
                                             td #{n.title}
-                                            td #{n.publication_date.getFullYear()}/#{n.publication_date.getMonth()+1}/#{n.publication_date.getDay()}
+                                            td #{n.start_date.toISOString().split('T')[0]}
+                                            td #{n.finish_date.toISOString().split('T')[0]}
 
                                             td
                                                 if n.author.username == user.username 
