@@ -25,7 +25,6 @@ const News = new Schema({
     url: {
         type: String,
         required: true,
-        unique: true,
         trim: true
     },
     image: {
