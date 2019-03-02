@@ -18,47 +18,43 @@ html(lang='en')
         link(rel='stylesheet', href='/public/assets/libs/css/full-slider.css')
 
     body
-        header
+        #carouselExampleIndicators.carousel.slide(data-ride='carousel')
             .hdr
                 .row
                     .col-md-2.col-sm-2.col-xs-2
                         img.logo-unison(src='https://www.unison.mx/wp-content/themes/awaken/images/logo.png')
                     .col-md-7.col-sm-7.col-xs-7
                         #tit
-                            h5 XXIX Semana Nacional de Investigación y Docencia en Matemáticas
-                            h6 Del 4 al 8 de marzo
+                            h6(style="font-size:1.8vw;") XXIX Semana Nacional de Investigación y Docencia en Matemáticas
+                            h6(style="font-size:1.3vw;") Del 4 al 8 de marzo
                     .col-md-3.col-sm-3.col-xs-3
                         img.logo-lcc(src='http://3.bp.blogspot.com/-2bz7zDgDtyo/UZKZSwUyTeI/AAAAAAAAASk/tfLhTJqxxuk/s1600/logoLCCazul.png')
-        
-            #carouselExampleIndicators.carousel.slide(data-ride='carousel')
-                ol#newslist1.carousel-indicators
-                    each n, i in departments_news    
-                        if i == 0
-                            li.active(data-target='#carouselExampleIndicators', data-slide-to=i)
-                        else
-                            li(data-target='#carouselExampleIndicators', data-slide-to=i)
-                    
-                #newslist2.carousel-inner(role='listbox')
-                    each n, i in departments_news    
-                        if i == 0
-                            .carousel-item.active(style="background-image: url('" + n.image.imageURL + "')")
-                                .carousel-caption.d-none.d-md-block
-                                    .fondo
-                                        h3 #{n.title}
-                                        p #{n.body}
-                        else
-                            .carousel-item(style="background-image: url('" + n.image.imageURL + "')")
-                                .carousel-caption.d-none.d-md-block
-                                    .fondo
-                                        h3 #{n.title} 
-                                        p #{n.body}
-
-                a.carousel-control-prev(href='#carouselExampleIndicators', role='button', data-slide='prev')
-                    span.carousel-control-prev-icon(aria-hidden='true')
-                    span.sr-only Anterior
-                a.carousel-control-next(href='#carouselExampleIndicators', role='button', data-slide='next')
-                    span.carousel-control-next-icon(aria-hidden='true')
-                    span.sr-only Siguiente
+            ol#newslist1.carousel-indicators
+                each n, i in departments_news    
+                    if i == 0
+                        li.active(data-target='#carouselExampleIndicators', data-slide-to=i)
+                    else
+                        li(data-target='#carouselExampleIndicators', data-slide-to=i)        
+            #newslist2.carousel-inner(role='listbox')
+                each n, i in departments_news    
+                    if i == 0
+                        .carousel-item.active(style="background-image: url('" + n.image.imageURL + "')")
+                            .carousel-caption.d-none.d-md-block
+                                .fondo
+                                    h3 #{n.title}
+                                    p #{n.body}
+                    else
+                        .carousel-item(style="background-image: url('" + n.image.imageURL + "')")
+                            .carousel-caption.d-none.d-md-block
+                                .fondo
+                                    h3 #{n.title} 
+                                    p #{n.body}
+            a.carousel-control-prev(href='#carouselExampleIndicators', role='button', data-slide='prev')
+                span.carousel-control-prev-icon(aria-hidden='true')
+                span.sr-only Anterior
+            a.carousel-control-next(href='#carouselExampleIndicators', role='button', data-slide='next')
+                span.carousel-control-next-icon(aria-hidden='true')
+                span.sr-only Siguiente
 
                 
         // Optional JavaScript

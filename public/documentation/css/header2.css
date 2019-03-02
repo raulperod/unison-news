@@ -5,7 +5,7 @@
 }
 #tit{
     text-align: center;
-    height: 100%;
+    padding-bottom: 10px;
 }
 .logo-lcc{
     width: 30%;
@@ -22,20 +22,19 @@
 }
 
 .hdr{
-    width: 100%;
-    min-height: auto;
-    height: 15%;
+    width: 100vw;
+    height: 10vh;
     background-color: #ffffff;
-    padding: 10px 50px 5px 50px;
+    padding: 10px 50px 10px 50px;
     float: top;
 }
+
 .carousel-inner{
-    height: 85%;
+    height: 90vh;
 }
+
 .carousel-item {
-    height: 100% !important;
-    width:  100% !important;
+    margin-bottom: 5vh;
+    height: 100vh;
+    width:  100vw;
 }
-html,body,#carouselExampleIndicators{
-    height: 100%;
-} 
