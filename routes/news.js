@@ -162,15 +162,15 @@ router.get('/show/:department_name', async (req, res) => {
     let { department_name } = req.params
 
     let departments_news = null
-    /*
+    
     if (department_name == "TODOS"){
         departments_news = await News.find({}).populate('image author')
     }else{
         let department = await Department.findOne({name:department_name})
         departments_news = await News.find({department}).populate('image author')
     }
-    */
-    res.render('news/show', {})
+    
+    res.render('news/show', {departments_news})
 })
 
 router.post('/getnews', async (req, res) => {
