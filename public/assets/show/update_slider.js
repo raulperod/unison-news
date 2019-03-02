@@ -57,7 +57,7 @@ function getNews(){
 
 $(function(){ 
     var minutes = 10
-    getNews()   
+    
     // refreshing
     setInterval(function(){ 
         getNews()   
