@@ -8,14 +8,14 @@
     height: 100%;
 }
 .logo-lcc{
-    width: 60%;
+    width: 55%;
     height: auto;
     display: block;
     margin-left: auto;
 }
 
 .logo-unison{
-    width: 45%;
+    width: 40%;
     height: auto;
     display: block;
     margin-right: auto;
@@ -24,13 +24,13 @@
 .hdr{
     width: 100%;
     min-height: auto;
-    height: 15%;
+    height: 12%;
     background-color: #ffffff;
     padding: 10px 50px 5px 50px;
     float: top;
 }
 .carousel-inner{
-    height: 85%;
+    height: 88%;
 }
 .carousel-item {
     height: 100% !important;
