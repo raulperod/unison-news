@@ -42,13 +42,13 @@ html(lang='en')
                             .carousel-caption.d-none.d-md-block
                                 .fondo
                                     h3 #{n.title}
-                                    p #{n.body}
+                                    p(style="font-size:1.2vw;") #{n.body}
                     else
                         .carousel-item(style="background-image: url('" + n.image.imageURL + "')")
                             .carousel-caption.d-none.d-md-block
                                 .fondo
                                     h3 #{n.title} 
-                                    p #{n.body}
+                                    p(style="font-size:1.2vw;") #{n.body}
             a.carousel-control-prev(href='#carouselExampleIndicators', role='button', data-slide='prev')
                 span.carousel-control-prev-icon(aria-hidden='true')
                 span.sr-only Anterior
