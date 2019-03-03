@@ -21,7 +21,7 @@ function addNews(news){
                                             <div class="carousel-caption d-none d-md-block">
                                                 <div class="fondo">
                                                     <h3>${news[i].title}</h3>
-                                                    <p>${news[i].body}</p>
+                                                    <p style="font-size:1.3vw;">${news[i].body}</p>
                                                 </div>    
                                             </div>
                                         </div>`);
@@ -30,7 +30,7 @@ function addNews(news){
                                             <div class="carousel-caption d-none d-md-block">
                                                 <div class="fondo">     
                                                     <h3>${news[i].title}</h3>
-                                                    <p>${news[i].body}</p>
+                                                    <p style="font-size:1.3vw;">${news[i].body}</p>
                                                 </div>        
                                             </div>
                                         </div>`);
@@ -56,7 +56,7 @@ function getNews(){
 }
 
 $(function(){ 
-    var minutes = 10
+    var minutes = 1
     
     // refreshing
     setInterval(function(){ 
