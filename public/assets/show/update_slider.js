@@ -59,8 +59,12 @@ $(function(){
     var minutes = 10
     
     // refreshing
-    setInterval(function(){ 
-        getNews()   
+    setInterval(function(){
+        try{
+            getNews()
+        } catch (error){
+            console.log(error)
+        }
     }, minutes * 1000 * 60); // time in minutes
 
 });
