@@ -160,14 +160,14 @@ router.get('/delete/:idNews', session_active, async (req, res) => {
 
 router.get('/show/:department_name', async (req, res) => {
     let { department_name } = req.params
-
+    const current_time = moment().toDate()
     let departments_news = null
     
     if (department_name == "TODOS"){
-        departments_news = await News.find({}).populate('image author')
+        departments_news = await News.find( {$and: [ { start_date: { $lte: current_time } }, { finish_date: { $gte: current_time } } ]} ).populate('image').sort('-start_date').limit(20)
     }else{
         let department = await Department.findOne({name:department_name})
-        departments_news = await News.find({department}).populate('image author')
+        departments_news = await News.find( { department, $and: [ { start_date: { $lte: current_time } }, { finish_date: { $gte: current_time } } ]} ).populate('image').sort('-start_date').limit(20)
     }
     
     res.render('news/show', {departments_news})
@@ -175,7 +175,7 @@ router.get('/show/:department_name', async (req, res) => {
 
 router.post('/getnews', async (req, res) => {
     const current_time = moment().toDate()
-    let news = await News.find({ start_date: { $lt: current_time }, finish_date: { $gt: current_time } }).populate('image').sort('-start_date').limit(20)
+    let news = await News.find( {$and: [ { start_date: { $lte: current_time } }, { finish_date: { $gte: current_time } } ]} ).populate('image').sort('-start_date').limit(20)
     res.json({ news })
 })
 
