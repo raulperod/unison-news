@@ -175,7 +175,7 @@ router.get('/show/:department_name', async (req, res) => {
 
 router.post('/getnews', async (req, res) => {
     const current_time = moment().toDate()
-    let news = await News.find({ start_date: { $lt: current_time }, finish_date: { $gt: current_time } }).populate('image').sort('-start_date').limit(10)
+    let news = await News.find({ start_date: { $lt: current_time }, finish_date: { $gt: current_time } }).populate('image').sort('-start_date').limit(20)
     res.json({ news })
 })
 
