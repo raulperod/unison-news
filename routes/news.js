@@ -9,9 +9,9 @@ const   router = require('express').Router(),
         cloudinary = require('cloudinary')
 
 cloudinary.config({
-    cloud_name: 'raulperod-dbfiles',
-    api_key: '357375837816246',
-    api_secret: 'RFmJRcbcWa1gr7sg3aRKc01q_Hg'
+    cloud_name: process.env.cloudinary_cloud_name,
+    api_key: process.env.cloudinary_api_key,
+    api_secret: process.env.cloudinary_api_secret
 })
 
 router.get('/new', session_active, async (req, res) => {
