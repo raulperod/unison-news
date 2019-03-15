@@ -1,5 +1,6 @@
 const   router = require('express').Router(),
         Department = require('../models/department'),
+        News = require('../models/news'),
         admin = require('../middlewares/admin_session')
 
 router.get('/new', admin, async (req, res) => {
@@ -59,6 +60,15 @@ router.get('/delete/:name', admin, async (req, res) => {
         res.redirect('/d/list')
         return    
     }
+    // finding the news with that department
+    let news_department = await News.find({department}),
+        TODOS_department = await Department.findOne({name:"TODOS"})
+
+    news_department.forEach( news => {
+        news.department = TODOS_department
+        news.save()
+    })
+
     await Department.findByIdAndDelete(department._id)
     res.redirect('/d/list')
 })

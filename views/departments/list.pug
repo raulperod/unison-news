@@ -51,8 +51,12 @@ block content
                                         tr
                                             td #{d.name}
                                             td
-                                                a.btn.btn-space.btn-primary(href="/d/edit/" + d.name) Editar
-                                                a.btn.btn-space.btn-secondary(href="/d/delete/" + d.name) Borrar
+                                                if d.name != "TODOS"
+                                                    a.btn.btn-space.btn-primary(href="/d/edit/" + d.name) Editar
+                                                    a.btn.btn-space.btn-secondary(href="/d/delete/" + d.name) Borrar
+                                                else
+                                                    a.btn.btn-space.btn-primary(href="/d/edit/" + d.name, disabled) Editar
+                                                    a.btn.btn-space.btn-secondary(href="/d/delete/" + d.name, disabled) Borrar
 
 block bodystyles                       
     // Optional JavaScript
