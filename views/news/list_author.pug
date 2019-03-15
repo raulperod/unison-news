@@ -54,7 +54,10 @@ block content
                                     each n in news
                                         tr
                                             td #{n.department.name}
-                                            td #{n.author.name} #{n.author.last_name} 
+                                            if n.author
+                                                td #{n.author.name} #{n.author.last_name} 
+                                            else
+                                                td Sin autor
                                             td #{n.title}
                                             td #{n.start_date.toISOString().split('T')[0]}
                                             td #{n.finish_date.toISOString().split('T')[0]}
