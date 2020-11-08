@@ -1,5 +1,5 @@
 const   mongoose = require('mongoose'),
-        URI = process.env.DB || 'mongodb://localhost:27017/unison-news'
+        URI = process.env.DB_NEW || 'mongodb://localhost:27017/unison-news'
 
 mongoose.connect(URI, { useNewUrlParser: true })
     .then(DB => console.log('DB is conected'))
